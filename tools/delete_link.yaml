@@ -1,0 +1,22 @@
+identity:
+  name: delete_link
+  author: linkly-hq
+  label:
+    en_US: Delete link
+description:
+  human:
+    en_US: Permanently delete a Linkly link by ID.
+  llm: 'Permanently delete one Linkly link by its numeric ID. This cannot be undone from the API; confirm with the user before calling it.'
+parameters:
+  - name: id
+    type: string
+    required: true
+    label:
+      en_US: Link ID
+    human_description:
+      en_US: The numeric ID of the link to delete.
+    llm_description: 'The numeric Linkly link ID to delete permanently.'
+    form: llm
+extra:
+  python:
+    source: tools/delete_link.py

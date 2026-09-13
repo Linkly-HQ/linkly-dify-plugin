@@ -1,0 +1,22 @@
+identity:
+  name: get_link
+  author: linkly-hq
+  label:
+    en_US: Get link
+description:
+  human:
+    en_US: Fetch a Linkly link by ID, including its short URL, destination, settings and click totals.
+  llm: 'Get the details of one Linkly link by its numeric ID: destination URL, short URL (full_url), name, slug, domain, UTM settings and click counts.'
+parameters:
+  - name: id
+    type: string
+    required: true
+    label:
+      en_US: Link ID
+    human_description:
+      en_US: The numeric ID of the link.
+    llm_description: 'The numeric Linkly link ID, as returned by create_link or list_links.'
+    form: llm
+extra:
+  python:
+    source: tools/get_link.py

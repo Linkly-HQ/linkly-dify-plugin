@@ -1,0 +1,43 @@
+identity:
+  author: linkly-hq
+  name: linkly
+  label:
+    en_US: Linkly
+  description:
+    en_US: Create branded short links and read click analytics with Linkly, the URL shortener with click tracking.
+  icon: icon.png
+  tags:
+    - utilities
+    - productivity
+credentials_for_provider:
+  api_key:
+    type: secret-input
+    required: true
+    label:
+      en_US: Linkly API key
+    placeholder:
+      en_US: Paste your Linkly API key
+    help:
+      en_US: Find or create your API key under Settings > API in the Linkly app.
+    url: https://app.linklyhq.com/app/user/api
+  workspace_id:
+    type: text-input
+    required: false
+    label:
+      en_US: Workspace ID
+    placeholder:
+      en_US: e.g. 12345 (leave blank to use your first workspace)
+    help:
+      en_US: The numeric ID of the Linkly workspace to act on. It is shown next to your API key in Settings > API. Leave blank to use the first workspace the key can access.
+    url: https://app.linklyhq.com/app/user/api
+tools:
+  - tools/create_link.yaml
+  - tools/get_link.yaml
+  - tools/list_links.yaml
+  - tools/get_clicks.yaml
+  - tools/click_counters.yaml
+  - tools/list_domains.yaml
+  - tools/delete_link.yaml
+extra:
+  python:
+    source: provider/linkly.py

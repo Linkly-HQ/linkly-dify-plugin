@@ -1,0 +1,86 @@
+identity:
+  name: get_clicks
+  author: linkly-hq
+  label:
+    en_US: Get click time series
+description:
+  human:
+    en_US: Time-series click counts for the workspace or a single link, by day or hour.
+  llm: 'Get click analytics as a time series (one row per day or hour) for the whole workspace or one link, over an optional date range. Use click_counters instead when you need totals grouped by country, platform, referrer or UTM tag.'
+parameters:
+  - name: link_id
+    type: string
+    required: false
+    label:
+      en_US: Link ID
+    human_description:
+      en_US: Restrict to one link by its numeric ID.
+    llm_description: 'Numeric Linkly link ID to restrict the analytics to a single link. Omit for the whole workspace.'
+    form: llm
+  - name: start
+    type: string
+    required: false
+    label:
+      en_US: Start date
+    human_description:
+      en_US: Start of the date range, YYYY-MM-DD.
+    llm_description: 'Start of the date range in YYYY-MM-DD format (inclusive). Optional.'
+    form: llm
+  - name: end
+    type: string
+    required: false
+    label:
+      en_US: End date
+    human_description:
+      en_US: End of the date range, YYYY-MM-DD.
+    llm_description: 'End of the date range in YYYY-MM-DD format (inclusive). Optional.'
+    form: llm
+  - name: frequency
+    type: select
+    required: false
+    default: 'day'
+    label:
+      en_US: Frequency
+    human_description:
+      en_US: One data point per day or per hour.
+    llm_description: 'Granularity of the time series: day (default) or hour.'
+    form: llm
+    options:
+      - value: day
+        label:
+          en_US: day
+      - value: hour
+        label:
+          en_US: hour
+  - name: unique
+    type: boolean
+    required: false
+    default: false
+    label:
+      en_US: Unique clicks only
+    human_description:
+      en_US: Count each visitor once.
+    llm_description: 'Set true to count only unique clicks (one per visitor). Default false.'
+    form: llm
+  - name: bots
+    type: boolean
+    required: false
+    default: true
+    label:
+      en_US: Include bot clicks
+    human_description:
+      en_US: Include clicks identified as bots.
+    llm_description: 'Set false to exclude clicks from bots and crawlers. Default true (include).'
+    form: llm
+  - name: timezone
+    type: string
+    required: false
+    label:
+      en_US: Timezone
+    human_description:
+      en_US: IANA timezone for bucketing, e.g. Europe/London.
+    llm_description: 'Optional IANA timezone name (e.g. America/New_York) used to bucket clicks into days or hours. Defaults to UTC.'
+    form: llm
+extra:
+  python:
+    source: tools/get_clicks.py

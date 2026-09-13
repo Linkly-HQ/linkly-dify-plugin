@@ -1,0 +1,128 @@
+identity:
+  name: click_counters
+  author: linkly-hq
+  label:
+    en_US: Clicks grouped by dimension
+description:
+  human:
+    en_US: Click totals grouped by country, city, platform, referrer, destination, ISP, bot, link or UTM tag.
+  llm: 'Get click counts grouped by one dimension (country, city, region, platform, referer, destination, bot_name, isp, link_id, ad_network, utm_source, utm_medium, utm_campaign, utm_content, utm_term, top_params), ordered by count descending, for the workspace or one link over an optional date range. Returns total and a list of values with counts.'
+parameters:
+  - name: counter
+    type: select
+    required: true
+    default: 'country'
+    label:
+      en_US: Dimension
+    human_description:
+      en_US: The dimension to group clicks by.
+    llm_description: 'Dimension to group clicks by.'
+    form: llm
+    options:
+      - value: country
+        label:
+          en_US: country
+      - value: city
+        label:
+          en_US: city
+      - value: region
+        label:
+          en_US: region
+      - value: platform
+        label:
+          en_US: platform
+      - value: referer
+        label:
+          en_US: referer
+      - value: destination
+        label:
+          en_US: destination
+      - value: bot_name
+        label:
+          en_US: bot_name
+      - value: isp
+        label:
+          en_US: isp
+      - value: link_id
+        label:
+          en_US: link_id
+      - value: ad_network
+        label:
+          en_US: ad_network
+      - value: utm_source
+        label:
+          en_US: utm_source
+      - value: utm_medium
+        label:
+          en_US: utm_medium
+      - value: utm_campaign
+        label:
+          en_US: utm_campaign
+      - value: utm_content
+        label:
+          en_US: utm_content
+      - value: utm_term
+        label:
+          en_US: utm_term
+      - value: top_params
+        label:
+          en_US: top_params
+  - name: link_id
+    type: string
+    required: false
+    label:
+      en_US: Link ID
+    human_description:
+      en_US: Restrict to one link by its numeric ID.
+    llm_description: 'Numeric Linkly link ID to restrict the analytics to a single link. Omit for the whole workspace.'
+    form: llm
+  - name: start
+    type: string
+    required: false
+    label:
+      en_US: Start date
+    human_description:
+      en_US: Start of the date range, YYYY-MM-DD.
+    llm_description: 'Start of the date range in YYYY-MM-DD format (inclusive). Optional.'
+    form: llm
+  - name: end
+    type: string
+    required: false
+    label:
+      en_US: End date
+    human_description:
+      en_US: End of the date range, YYYY-MM-DD.
+    llm_description: 'End of the date range in YYYY-MM-DD format (inclusive). Optional.'
+    form: llm
+  - name: country
+    type: string
+    required: false
+    label:
+      en_US: Country filter
+    human_description:
+      en_US: ISO 3166-1 alpha-2 code, e.g. US.
+    llm_description: 'Optional ISO 3166-1 alpha-2 country code to filter clicks by, e.g. US or GB.'
+    form: llm
+  - name: unique
+    type: boolean
+    required: false
+    default: false
+    label:
+      en_US: Unique clicks only
+    human_description:
+      en_US: Count each visitor once.
+    llm_description: 'Set true to count only unique clicks (one per visitor). Default false.'
+    form: llm
+  - name: bots
+    type: boolean
+    required: false
+    default: true
+    label:
+      en_US: Include bot clicks
+    human_description:
+      en_US: Include clicks identified as bots.
+    llm_description: 'Set false to exclude clicks from bots and crawlers. Default true (include).'
+    form: llm
+extra:
+  python:
+    source: tools/click_counters.py

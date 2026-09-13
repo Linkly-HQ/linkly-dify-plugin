@@ -1,0 +1,68 @@
+identity:
+  name: list_links
+  author: linkly-hq
+  label:
+    en_US: List links
+description:
+  human:
+    en_US: List or search the short links in the Linkly workspace, with paging and sorting.
+  llm: 'List links in the Linkly workspace. Supports a free-text search over name, URL and note, paging, and sorting by any link field or by clicks_total / clicks_today. Returns links plus paging info (total_entries, total_pages).'
+parameters:
+  - name: search
+    type: string
+    required: false
+    label:
+      en_US: Search
+    human_description:
+      en_US: Free-text search over name, destination URL and note.
+    llm_description: 'Optional search text matched against link name, destination URL, slug and note.'
+    form: llm
+  - name: page
+    type: number
+    required: false
+    default: 1
+    label:
+      en_US: Page
+    human_description:
+      en_US: Page number, starting at 1.
+    llm_description: 'Page number to return, starting at 1. Default 1.'
+    form: llm
+  - name: page_size
+    type: number
+    required: false
+    default: 20
+    label:
+      en_US: Page size
+    human_description:
+      en_US: Links per page (max 100).
+    llm_description: 'Number of links per page, 1-100. Default 20.'
+    form: llm
+  - name: sort_by
+    type: string
+    required: false
+    label:
+      en_US: Sort by
+    human_description:
+      en_US: Field to sort by, e.g. clicks_total or inserted_at.
+    llm_description: 'Optional field to sort by: any link field (e.g. name, inserted_at) or the click aggregates clicks_total, clicks_today, clicks_prev_day.'
+    form: llm
+  - name: sort_dir
+    type: select
+    required: false
+    default: 'desc'
+    label:
+      en_US: Sort direction
+    human_description:
+      en_US: asc or desc.
+    llm_description: 'Sort direction: asc or desc. Default desc.'
+    form: llm
+    options:
+      - value: asc
+        label:
+          en_US: asc
+      - value: desc
+        label:
+          en_US: desc
+extra:
+  python:
+    source: tools/list_links.py

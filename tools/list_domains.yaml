@@ -1,0 +1,14 @@
+identity:
+  name: list_domains
+  author: linkly-hq
+  label:
+    en_US: List domains
+description:
+  human:
+    en_US: List the custom domains available for short links in the Linkly workspace.
+  llm: 'List the custom (branded) domains configured in the Linkly workspace. Use a returned domain name as the domain parameter of create_link.'
+parameters:
+  []
+extra:
+  python:
+    source: tools/list_domains.py

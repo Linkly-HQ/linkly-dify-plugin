@@ -1,0 +1,103 @@
+identity:
+  name: create_link
+  author: linkly-hq
+  label:
+    en_US: Create short link
+description:
+  human:
+    en_US: Create a Linkly short link for a destination URL, optionally with a name, custom slug, branded domain, note and UTM tags.
+  llm: 'Create a new Linkly short link that redirects to the given destination URL. Returns the short URL (full_url), the link ID and the stored settings. Use list_domains first if the user wants the link on a specific branded domain.'
+parameters:
+  - name: url
+    type: string
+    required: true
+    label:
+      en_US: Destination URL
+    human_description:
+      en_US: The long URL the short link should redirect to.
+    llm_description: 'The destination URL to shorten. Must include the scheme, e.g. https://example.com/page.'
+    form: llm
+  - name: name
+    type: string
+    required: false
+    label:
+      en_US: Name
+    human_description:
+      en_US: A human-readable name for the link.
+    llm_description: 'Optional display name for the link shown in the Linkly dashboard.'
+    form: llm
+  - name: slug
+    type: string
+    required: false
+    label:
+      en_US: Custom slug
+    human_description:
+      en_US: The path after the domain, e.g. spring-sale.
+    llm_description: 'Optional custom slug (the part after the domain). Letters, numbers and dashes. Leave empty for a random slug.'
+    form: llm
+  - name: domain
+    type: string
+    required: false
+    label:
+      en_US: Domain
+    human_description:
+      en_US: A custom domain configured in the workspace.
+    llm_description: 'Optional branded domain to use for the short link, e.g. go.example.com. Must already be added to the workspace (see list_domains). Leave empty for the default Linkly domain.'
+    form: llm
+  - name: note
+    type: string
+    required: false
+    label:
+      en_US: Note
+    human_description:
+      en_US: An internal note stored with the link.
+    llm_description: 'Optional internal note stored on the link.'
+    form: llm
+  - name: utm_source
+    type: string
+    required: false
+    label:
+      en_US: utm_source
+    human_description:
+      en_US: UTM source appended to the destination.
+    llm_description: 'Optional utm_source value to append to the destination URL.'
+    form: llm
+  - name: utm_medium
+    type: string
+    required: false
+    label:
+      en_US: utm_medium
+    human_description:
+      en_US: UTM medium appended to the destination.
+    llm_description: 'Optional utm_medium value to append to the destination URL.'
+    form: llm
+  - name: utm_campaign
+    type: string
+    required: false
+    label:
+      en_US: utm_campaign
+    human_description:
+      en_US: UTM campaign appended to the destination.
+    llm_description: 'Optional utm_campaign value to append to the destination URL.'
+    form: llm
+  - name: utm_content
+    type: string
+    required: false
+    label:
+      en_US: utm_content
+    human_description:
+      en_US: UTM content appended to the destination.
+    llm_description: 'Optional utm_content value to append to the destination URL.'
+    form: llm
+  - name: utm_term
+    type: string
+    required: false
+    label:
+      en_US: utm_term
+    human_description:
+      en_US: UTM term appended to the destination.
+    llm_description: 'Optional utm_term value to append to the destination URL.'
+    form: llm
+extra:
+  python:
+    source: tools/create_link.py
