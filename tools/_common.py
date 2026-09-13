@@ -3,14 +3,16 @@
 from collections.abc import Generator
 from typing import Any
 
-from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
 from utils.linkly_client import LinklyClient, LinklyError, client_from_credentials
 
 
-class LinklyTool(Tool):
-    """Base class: builds the API client from provider credentials and normalises errors."""
+class LinklyMixin:
+    """Mixin for the tool classes: builds the API client from provider credentials and normalises errors.
+
+    Deliberately not a Tool subclass - Dify's loader requires exactly one Tool subclass per tool module.
+    """
 
     def _client(self) -> LinklyClient:
         return client_from_credentials(self.runtime.credentials or {})

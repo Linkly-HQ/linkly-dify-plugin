@@ -1,13 +1,14 @@
 from collections.abc import Generator
 from typing import Any
 
+from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools._common import LinklyTool, as_int, link_summary
+from tools._common import LinklyMixin, as_int, link_summary
 from utils.linkly_client import LinklyClient
 
 
-class ListLinksTool(LinklyTool):
+class ListLinksTool(LinklyMixin, Tool):
     def _run(self, client: LinklyClient, p: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         page_size = max(1, min(as_int(p.get("page_size"), 20) or 20, 100))
         data = client.list_links(

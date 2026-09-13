@@ -1,13 +1,14 @@
 from collections.abc import Generator
 from typing import Any
 
+from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools._common import LinklyTool, link_summary
+from tools._common import LinklyMixin, link_summary
 from utils.linkly_client import LinklyClient, LinklyError
 
 
-class CreateLinkTool(LinklyTool):
+class CreateLinkTool(LinklyMixin, Tool):
     def _run(self, client: LinklyClient, p: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         url = (p.get("url") or "").strip()
         if not url:

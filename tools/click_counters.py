@@ -1,16 +1,17 @@
 from collections.abc import Generator
 from typing import Any
 
+from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools._common import LinklyTool, as_bool
+from tools._common import LinklyMixin, as_bool
 from utils.linkly_client import LinklyClient, LinklyError
 
 COUNTERS = {"country", "city", "region", "platform", "referer", "destination", "bot_name", "isp", "link_id",
             "ad_network", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term", "top_params"}
 
 
-class ClickCountersTool(LinklyTool):
+class ClickCountersTool(LinklyMixin, Tool):
     def _run(self, client: LinklyClient, p: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         counter = (p.get("counter") or "country").strip()
         if counter not in COUNTERS:

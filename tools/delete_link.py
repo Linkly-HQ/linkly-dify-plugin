@@ -1,13 +1,14 @@
 from collections.abc import Generator
 from typing import Any
 
+from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools._common import LinklyTool, as_int
+from tools._common import LinklyMixin, as_int
 from utils.linkly_client import LinklyClient, LinklyError
 
 
-class DeleteLinkTool(LinklyTool):
+class DeleteLinkTool(LinklyMixin, Tool):
     def _run(self, client: LinklyClient, p: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         link_id = as_int(p.get("id"))
         if link_id is None:

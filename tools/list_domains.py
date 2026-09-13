@@ -1,13 +1,14 @@
 from collections.abc import Generator
 from typing import Any
 
+from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools._common import LinklyTool
+from tools._common import LinklyMixin
 from utils.linkly_client import LinklyClient
 
 
-class ListDomainsTool(LinklyTool):
+class ListDomainsTool(LinklyMixin, Tool):
     def _run(self, client: LinklyClient, p: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         data = client.list_domains()
         domains = data.get("domains", data if isinstance(data, list) else [])

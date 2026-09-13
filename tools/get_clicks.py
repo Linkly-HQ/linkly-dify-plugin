@@ -1,13 +1,14 @@
 from collections.abc import Generator
 from typing import Any
 
+from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 
-from tools._common import LinklyTool, as_bool
+from tools._common import LinklyMixin, as_bool
 from utils.linkly_client import LinklyClient
 
 
-class GetClicksTool(LinklyTool):
+class GetClicksTool(LinklyMixin, Tool):
     def _run(self, client: LinklyClient, p: dict[str, Any]) -> Generator[ToolInvokeMessage, None, None]:
         params = {
             "link_id": p.get("link_id"),
