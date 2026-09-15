@@ -14,7 +14,7 @@
 2. In the Linkly app open **Settings > API** (https://app.linklyhq.com/app/user/api) and copy your **API key**. Note the **workspace ID** shown on the same page.
 3. In Dify go to **Plugins > Linkly > Authorize** and paste the API key. The workspace ID is optional; leave it blank to use the first workspace the key can access.
 
-The plugin needs outbound HTTPS access to `api.linklyhq.com`.
+Connection requirements: the plugin connects over HTTPS to the Linkly API endpoint `https://api.linklyhq.com/api/v1` (base URL), authenticating with the API key as a Bearer token. No other outbound connections are made.
 
 ## Tools
 
